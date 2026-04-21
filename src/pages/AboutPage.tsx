@@ -1,6 +1,7 @@
 import { CheckCircle2 } from 'lucide-react';
 import { AuthorBlock } from '../components/AuthorBlock';
 import { Newsletter } from '../components/Newsletter';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 const principles = [
   'Write with clarity before novelty.',
@@ -9,6 +10,12 @@ const principles = [
 ];
 
 export function AboutPage() {
+  usePageMeta({
+    title: 'About',
+    description: 'Learn about Signal & Study, an editorial blog for careful technology thinking.',
+    path: '/about',
+  });
+
   return (
     <main>
       <section className="page-hero about-hero">

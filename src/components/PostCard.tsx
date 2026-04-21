@@ -10,7 +10,7 @@ export function PostCard({ post, variant = 'default' }: PostCardProps) {
   return (
     <article className={`post-card post-card-${variant}`}>
       <a className="post-image-link" href={`/blog/${post.slug}`} aria-label={post.title}>
-        <img src={post.image} alt="" loading="lazy" />
+        <img src={post.image} alt={post.title} loading="lazy" />
       </a>
       <div className="post-card-body">
         <div className="meta-row">

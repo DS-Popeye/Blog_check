@@ -4,6 +4,7 @@ import { Newsletter } from '../components/Newsletter';
 import { PostCard } from '../components/PostCard';
 import { SectionHeader } from '../components/SectionHeader';
 import type { BlogPost } from '../data/posts';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 type HomePageProps = {
   posts: BlogPost[];
@@ -12,6 +13,12 @@ type HomePageProps = {
 const categories = ['AI Tools', 'Research', 'Education', 'Learning Design', 'Technology'];
 
 export function HomePage({ posts }: HomePageProps) {
+  usePageMeta({
+    title: 'AI, Research, and Education Blog',
+    description: 'Useful ideas for AI, technology, research workflows, and modern education.',
+    path: '/',
+  });
+
   const featured = posts.filter((post) => post.featured);
   const latest = posts.slice(2);
 
@@ -83,7 +90,7 @@ export function HomePage({ posts }: HomePageProps) {
             const icons = [Sparkles, BookOpen, Layers];
             const Icon = icons[index % icons.length];
             return (
-              <a className="category-card" href="/blog" key={category}>
+              <a className="category-card" href={`/blog?tag=${encodeURIComponent(category)}`} key={category}>
                 <Icon size={20} />
                 <span>{category}</span>
               </a>

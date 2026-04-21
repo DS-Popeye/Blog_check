@@ -1,7 +1,9 @@
 import { ArrowLeft } from 'lucide-react';
 import { Newsletter } from '../components/Newsletter';
+import { NotFoundPage } from '../components/NotFoundPage';
 import { PostCard } from '../components/PostCard';
 import type { BlogPost } from '../data/posts';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 type PostPageProps = {
   posts: BlogPost[];
@@ -9,7 +11,18 @@ type PostPageProps = {
 };
 
 export function PostPage({ posts, slug }: PostPageProps) {
-  const post = posts.find((item) => item.slug === slug) ?? posts[0];
+  const post = posts.find((item) => item.slug === slug);
+
+  usePageMeta({
+    title: post?.title ?? 'Page not found',
+    description: post?.excerpt ?? 'The article you were looking for could not be found.',
+    image: post?.image,
+    path: post ? `/blog/${post.slug}` : '/404',
+    type: post ? 'article' : 'website',
+  });
+
+  if (!post) return <NotFoundPage />;
+
   const related = posts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
@@ -28,7 +41,7 @@ export function PostPage({ posts, slug }: PostPageProps) {
             <span>{post.readTime}</span>
           </div>
         </div>
-        <img className="article-image" src={post.image} alt="" />
+        <img className="article-image" src={post.image} alt={post.title} />
         <div className="article-content">
           {post.content.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
