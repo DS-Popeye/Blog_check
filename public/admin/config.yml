@@ -1,0 +1,111 @@
+# Decap CMS configuration for Signal & Study.
+#
+# Live testing URL: https://myblogsite10.netlify.app
+#
+# Before /admin works on Netlify:
+# - Deploy this repo from GitHub to Netlify.
+# - Enable Netlify Identity for the site.
+# - Enable Git Gateway under Identity > Services.
+# - Invite editor/admin users through Netlify Identity.
+# - Visit https://myblogsite10.netlify.app/admin and sign in.
+#
+# Publishing flow:
+# - Editors create or edit posts at /admin.
+# - Decap commits Markdown files into content/posts on the main branch.
+# - Netlify receives the Git change and rebuilds the static frontend.
+# - No backend or database is used.
+
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+# No publish_mode is set for first-time testing.
+# Decap's default simple publishing mode commits changes directly.
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+site_url: "https://myblogsite10.netlify.app"
+display_url: "https://myblogsite10.netlify.app"
+logo_url: "/favicon.svg"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "content/posts"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    summary: "{{title}} - {{date}}"
+    editor:
+      preview: true
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        required: true
+
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+        required: true
+        hint: "URL-friendly value, for example: ai-tutors-and-the-next-learning-loop"
+        pattern:
+          - "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          - "Use lowercase letters, numbers, and hyphens only."
+
+      - label: "Date"
+        name: "date"
+        widget: "date"
+        required: true
+        format: "YYYY-MM-DD"
+
+      - label: "Author"
+        name: "author"
+        widget: "string"
+        required: true
+
+      - label: "Excerpt"
+        name: "excerpt"
+        widget: "text"
+        required: true
+        hint: "Short summary used on listing pages and SEO metadata."
+
+      - label: "Cover Image"
+        name: "coverImage"
+        widget: "image"
+        required: true
+        hint: "Uploaded images are stored in public/uploads and referenced as /uploads/file-name."
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        required: true
+        options:
+          - "AI in Education"
+          - "AI Tools"
+          - "Education"
+          - "Learning Design"
+          - "Research"
+          - "Technology"
+
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: true
+        allow_add: true
+        summary: "{{fields.tag}}"
+        field:
+          label: "Tag"
+          name: "tag"
+          widget: "string"
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        required: true

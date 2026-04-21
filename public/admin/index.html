@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Signal & Study Admin</title>
+  </head>
+  <body>
+    <!--
+      Decap CMS loads this config from /admin/config.yml.
+
+      Production setup notes:
+      1. Deploy this project to Netlify from a GitHub repository.
+      2. In Netlify, enable Identity.
+      3. In Netlify, enable Git Gateway under Identity > Services.
+      4. Invite admin users through Netlify Identity.
+      5. Visit /admin on the deployed site and sign in.
+
+      Publishing writes Markdown files to content/posts in Git.
+      Netlify rebuilds the static site after the Git commit is pushed.
+    -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+  </body>
+</html>
