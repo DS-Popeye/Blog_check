@@ -3,8 +3,8 @@ import { AuthorBlock } from '../components/AuthorBlock';
 import { Newsletter } from '../components/Newsletter';
 import { PostCard } from '../components/PostCard';
 import { SectionHeader } from '../components/SectionHeader';
-import type { BlogPost } from '../data/posts';
 import { usePageMeta } from '../hooks/usePageMeta';
+import type { BlogPost } from '../lib/posts';
 
 type HomePageProps = {
   posts: BlogPost[];
@@ -19,7 +19,7 @@ export function HomePage({ posts }: HomePageProps) {
     path: '/',
   });
 
-  const featured = posts.filter((post) => post.featured);
+  const featured = posts.slice(0, 2);
   const latest = posts.slice(2);
 
   return (

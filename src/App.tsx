@@ -6,9 +6,9 @@ import { PostPage } from './pages/PostPage';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { NotFoundPage } from './components/NotFoundPage';
-import { posts } from './data/posts';
 import { useTheme } from './hooks/useTheme';
 import { getRoute } from './lib/routing';
+import { posts } from './lib/posts';
 
 function App() {
   const route = getRoute();

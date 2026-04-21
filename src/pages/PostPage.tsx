@@ -2,8 +2,8 @@ import { ArrowLeft } from 'lucide-react';
 import { Newsletter } from '../components/Newsletter';
 import { NotFoundPage } from '../components/NotFoundPage';
 import { PostCard } from '../components/PostCard';
-import type { BlogPost } from '../data/posts';
 import { usePageMeta } from '../hooks/usePageMeta';
+import type { BlogPost } from '../lib/posts';
 
 type PostPageProps = {
   posts: BlogPost[];
@@ -16,7 +16,7 @@ export function PostPage({ posts, slug }: PostPageProps) {
   usePageMeta({
     title: post?.title ?? 'Page not found',
     description: post?.excerpt ?? 'The article you were looking for could not be found.',
-    image: post?.image,
+    image: post?.coverImage,
     path: post ? `/blog/${post.slug}` : '/404',
     type: post ? 'article' : 'website',
   });
@@ -37,22 +37,12 @@ export function PostPage({ posts, slug }: PostPageProps) {
           <p>{post.excerpt}</p>
           <div className="article-meta">
             <span>{post.author}</span>
-            <span>{post.date}</span>
+            <span>{post.displayDate}</span>
             <span>{post.readTime}</span>
           </div>
         </div>
-        <img className="article-image" src={post.image} alt={post.title} />
-        <div className="article-content">
-          {post.content.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          <h2>What to watch next</h2>
-          <p>
-            The strongest technology programs will pair faster tools with better judgment:
-            clear evaluation, transparent workflows, and a willingness to revise assumptions
-            as evidence changes.
-          </p>
-        </div>
+        <img className="article-image" src={post.coverImage} alt={post.title} />
+        <div className="article-content" dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>
 
       <section className="section soft-band">

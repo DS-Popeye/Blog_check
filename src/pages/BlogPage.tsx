@@ -2,8 +2,8 @@ import { Search, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { PostCard } from '../components/PostCard';
 import { SectionHeader } from '../components/SectionHeader';
-import type { BlogPost } from '../data/posts';
 import { usePageMeta } from '../hooks/usePageMeta';
+import type { BlogPost } from '../lib/posts';
 
 type BlogPageProps = {
   posts: BlogPost[];
