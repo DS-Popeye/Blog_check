@@ -61,9 +61,13 @@ collections:
 
       - label: "Date"
         name: "date"
-        widget: "date"
+        widget: "datetime"
         required: true
+        default: "{{now}}"
+        date_format: "YYYY-MM-DD"
+        time_format: false
         format: "YYYY-MM-DD"
+        picker_utc: true
 
       - label: "Author"
         name: "author"
